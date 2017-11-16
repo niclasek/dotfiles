@@ -58,8 +58,17 @@ echo "timer set for $1 minutes with the message \"$2\" and button \"$3\""
 fi
 }
 
+#For finding files
 function f() {
     find . -iname "$1"
+}
+
+#For finding text in files
+function fif() {
+    echo "args <path> <depth> <filename> <string>"
+    if [ "$#" -eq 4 ]; then   
+        find $1 -maxdepth $2 -type f -name "$3" -print0 | xargs -0 grep "$4"
+    fi
 }
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
