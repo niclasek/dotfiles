@@ -1,0 +1,31 @@
+[user]
+	name = niclas
+	email = niclas.l.ek@gmail.com
+[credential]
+	helper = osxkeychain
+[alias]
+	co = checkout
+    
+    # unstage staged files (or pass a filename)
+    unstage = reset HEAD --
+
+    # show a tree with all branches
+    tree = log --graph --decorate --all --oneline
+
+    # discard all changes since last commit (use with caution)
+    rh = reset HEAD --hard
+
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    trustExitCode = true
+    cmd = open -W -a Meld --args \"$LOCAL\" \"$PWD/$REMOTE\"
+[merge]
+    tool = meld
+[mergetool]
+    prompt = false
+[mergetool "meld"]
+    trustExitCode = true
+    cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
