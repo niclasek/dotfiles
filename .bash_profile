@@ -4,21 +4,20 @@ shopt -s histappend
 
 export EDITOR=vim
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; 
-then
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
 #git prompt from git repository at github
-source ~/Utilities/git-prompt.sh
-#source ~/Utilities/git-prompt-addition
+source ~/git-prompt.sh
+
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; __git_ps1 '' '\[\033[0;34m\]\u@\h: \w\\$\[\033[0m\] ' '%s|'"
 
 #git completion from git repository at github
-source ~/Utilities/git-completion.bash
+source ~/git-completion.bash
 
 #Unused PS1 examples
 #export PS1='$(__git_ps1 "%s ")\u@\h \w\$ '
@@ -32,53 +31,21 @@ bind '"\e[B":history-search-forward'
 
 alias ls="ls -lahG"
 alias s="git status"
-alias yt="open https://www.youtube.com/"
-alias gh="open https://github.com/"
-alias glh="open http://localhost:8080/"
-alias rlh="open http://localhost:3000/"
-alias presisu="memcached -d && mysql.server start && (cd ~/Objects/sisu ; rake ts:start)"
 alias myip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias pu="cd && clear"
 
-upgrade_casks() {
-    old_ifs=$IFS
-    IFS=$'\n'
-    for cask in $(brew cask list)
-    do
-        caskname=$(awk '{ print $1 }' <<< $cask)
-        if grep '(!)$' <<< $cask >/dev/null
-        then
-            echo "warning: the installed cask $caskname seems to be" \
-                "unavailable in homebrew-cask, has it been renamed?" && continue
-        fi
-        if brew cask info $cask | grep -qiF 'Not installed'
-        then
-            echo "--> upgrading cask $cask"
-            brew cask uninstall $cask
-            brew cask install $cask
-        fi
-    done
-    brew cask cleanup
-    IFS=$old_ifs
-}
-
-pupdate() {
-    bupdate
-    upgrade_casks
-}
-
 bupdate() {
-    for action in update doctor 'upgrade --all' cleanup
+    for cmd in brew\ {update,doctor,upgrade,cleanup,prune}
     do
-        echo "--> brew $action" && brew $action
+        echo "--> $cmd" && $cmd || return 1
     done
 }
 
-ptimer() {
+timer() {
 re='^[0-9]+$'
 if ! [[ $1 =~ $re ]] ; then
-  echo "    ptimer2 takes three input parameters: time, message and button text. 
-    Example usage: ptimer2 2 \"Time for a break!\" \"Yes, that is a good idea\" 
+  echo "    ptimer2 takes three input parameters: time, message and button text.
+    Example usage: ptimer2 2 \"Time for a break!\" \"Yes, that is a good idea\"
     sets a two minutes timer with message \"Time for a break!\" with button \"Yes, that is a goo idea.\""
 else
 echo "timer set for $1 minutes with the message \"$2\" and button \"$3\""
@@ -98,11 +65,4 @@ sleep_and_display(){
 EOF
 }
 
-#Joels git prompt
-#source ~/Utilities/git_prompt
-#export PS1="\$(git_prompt)"$PS1
-
-#export DYLD_LIBRARY_PATH=/usr/local/Cellar/mysql/5.6.24/lib/
-#launchctl setenv DYLD_LIBRARY_PATH /usr/local/Cellar/mysql/5.6.24/lib/
-
-
+export JAVA_HOME="$(/usr/libexec/java_home)"
