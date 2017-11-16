@@ -30,7 +30,7 @@ bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
 alias ls="ls -lahG"
-alias s="git status -sb"
+alias s="git status"
 alias myip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias pu="cd && clear"
 
