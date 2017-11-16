@@ -58,11 +58,4 @@ echo "timer set for $1 minutes with the message \"$2\" and button \"$3\""
 fi
 }
 
-sleep_and_display(){
-    sleep $(($1 * 60))
-    /usr/bin/osascript <<-EOF
-        display dialog "$2" buttons {"$3"} default button "$3" with title "$4"
-EOF
-}
-
 export JAVA_HOME="$(/usr/libexec/java_home)"
