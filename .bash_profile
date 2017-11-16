@@ -9,7 +9,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 #git prompt from git repository at github
-source ~/git-prompt.sh
+source ~/.git-prompt.sh
 
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
@@ -17,7 +17,7 @@ export GIT_PS1_SHOWCOLORHINTS=1
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; __git_ps1 '' '\[\033[0;34m\]\u@\h: \w\\$\[\033[0m\] ' '%s|'"
 
 #git completion from git repository at github
-source ~/git-completion.bash
+source ~/.git-completion.bash
 
 #Unused PS1 examples
 #export PS1='$(__git_ps1 "%s ")\u@\h \w\$ '
