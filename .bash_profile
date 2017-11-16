@@ -58,4 +58,8 @@ echo "timer set for $1 minutes with the message \"$2\" and button \"$3\""
 fi
 }
 
+function f() {
+    find . -iname "$1"
+}
+
 export JAVA_HOME="$(/usr/libexec/java_home)"
