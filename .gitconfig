@@ -4,7 +4,7 @@
 [credential]
 	helper = osxkeychain
 [core]
-    excludesfile = ~/.gitignore_global
+	excludesfile = /Users/niclas/.gitignore_global
 
 [alias]
 	co = checkout
@@ -37,3 +37,9 @@
 [mergetool "meld"]
     trustExitCode = true
     cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

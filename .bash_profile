@@ -68,6 +68,8 @@ function fif() {
     echo "args <path> <depth> <filename> <string>"
     if [ "$#" -eq 4 ]; then   
         find $1 -maxdepth $2 -type f -name "$3" -print0 | xargs -0 grep "$4"
+    else
+        echo "Wrong number of arguments"
     fi
 }
 
