@@ -2,6 +2,7 @@ export HISTCONTROL=ignoredups:erasedups
 export HISTSIZE=10000
 shopt -s histappend
 
+#use vim as editor
 export EDITOR=vim
 
 #git prompt from git repository at github
